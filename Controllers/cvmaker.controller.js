@@ -3,7 +3,6 @@
 import groq from "../config/groq.js";
 export async function generateCVFromShortDetails(req,res) {
     let shortDetails=req.body.shortDetails
-    console.log(shortDetails)
 const prompt = `
 You are a CV generator AI.
 
@@ -110,7 +109,7 @@ SCHEMA (STRICT):
       }
     },
     {
-      type: "CVProjects",
+      type: "Project Link",
       props: {
         id: "projects",
         columns: number,
@@ -130,8 +129,8 @@ SCHEMA (STRICT):
 LOGIC RULES:
 - Include CVExperience ONLY if work experience is mentioned.
 - Include CVEducation ONLY if education is mentioned.
-- Include CVProjects ONLY if the user mentions projects, apps, GitHub, or websites.
-- If CVProjects is included, at least ONE project item is required.
+- Include Project Link ONLY if the user mentions projects, apps, GitHub, or websites.
+- If Project Link is included, at least ONE project item is required.
 - Do NOT hallucinate URLs or GitHub links.
 
 User details:
@@ -162,4 +161,3 @@ ${shortDetails}
     return res.json(parsed);
   // return    res.json(JSON.parse(result)); // important: crash if invalid JSON
 }
-
