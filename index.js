@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 
 
 app.get('/app', (req, res) => {
-  res.status(200).send({ message: 'Welcome to Dellife server'+process.env.REACT_PORT });
+  res.status(200).send({ message: 'Welcome to Dellife server'+process.env.REACT_PORT+process.env.GROQ_API_KEY });
 });
 // Routes
 // app.use(UserRoutes)
@@ -138,4 +138,5 @@ app.listen(PORT, () => {
 //     delete users[socket.id];
 //   });
 // });
+
 
