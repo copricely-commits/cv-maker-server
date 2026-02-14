@@ -3,6 +3,7 @@
 import groq from "../config/groq.js";
 export async function generateCVFromShortDetails(req,res) {
     let shortDetails=req.body.shortDetails
+    console.log(shortDetails)
 const prompt = `
 You are a CV generator AI.
 
@@ -161,3 +162,4 @@ ${shortDetails}
     return res.json(parsed);
   // return    res.json(JSON.parse(result)); // important: crash if invalid JSON
 }
+
