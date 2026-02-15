@@ -18,23 +18,23 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }))
 // app.use(bodyParser.json())
 app.use(bodyParser.json({ limit: '100mb' }))
-app.use(cors())
-// app.use(
-//   cors({
-//     origin: function (origin, callback) {
-//       // allow server-to-server or same-origin (no origin)
-//       if (!origin) return callback(new Error("Origin not allowed"));
+// app.use(cors())
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // allow server-to-server or same-origin (no origin)
+      if (!origin) return callback(new Error("Origin not allowed"));
 
-//       if (allowedOrigins.includes(origin)) {
-//         callback(null, true);
-//       } else {
-//         callback(new Error("Not allowed by CORS"));
-//       }
-//     },
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     credentials: true,
-//   })
-// );
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 app.use((req, res, next) => {
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   next();
@@ -138,5 +138,6 @@ app.listen(PORT, () => {
 //     delete users[socket.id];
 //   });
 // });
+
 
 
